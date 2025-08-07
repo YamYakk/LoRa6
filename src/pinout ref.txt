@@ -1,0 +1,33 @@
+#pragma once
+
+// Heltec WiFi LoRa 32 V3.2 — GPIO pin mapping
+
+// ————— LoRa (SX1262) control pins —————
+#define LORA_CS     8    // FSPI_CS0  
+#define LORA_DIO1   14   // DIO1 / IRQ  
+#define LORA_BUSY   12   // BUSY  
+#define LORA_RESET  13   // RST  
+
+// ————— SPI bus (default VSPI) —————
+// these are already configured by the Arduino core,
+// but you can call SPI.begin() with them if you ever
+// move to non-default pins:
+#define SPI_SCK     18   // FSPI_CLK  
+#define SPI_MISO    19   // FSPI_D  
+#define SPI_MOSI    23   // FSPI_HD  
+
+// ————— Onboard peripherals —————
+#define OLED_RST    21   // OLED reset  
+#define BTN_BOOT    0    // Boot-mode button  
+#define UART_TX     44   // CP2102 RXD (to ESP32 U0TXD)  
+#define UART_RX     43   // CP2102 TXD (from ESP32 U0RXD)  
+
+// ————— Power & ADC —————
+#define VIN_5V      A0   // 5 V input / sensor Vext  
+#define VBAT_ADC    4    // ADC1_CH4 — measure battery  
+
+// ————— JTAG (if you ever need it) —————
+#define JTAG_TMS    7
+#define JTAG_TDI    6
+#define JTAG_TDO    9
+#define JTAG_TCK    10
