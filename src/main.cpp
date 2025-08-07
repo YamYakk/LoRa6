@@ -33,7 +33,7 @@ void loop() {
   Serial.print(F("Cnt=")); Serial.print(cnt);
   Serial.print(F("  Hall=")); Serial.print(hallValue); Serial.println(F(" units"));
 
-  // 3) pack into 4 bytes: [cnt_H, cnt_L, t100_H, t100_L]
+  // 3) pack into 4 bytes: [cnt_H, cnt_L, hall_H, hall_L]
   uint8_t payload[4] = {
     highByte(cnt), lowByte(cnt),
     highByte(t100), lowByte(t100)
