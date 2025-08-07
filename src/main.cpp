@@ -9,9 +9,6 @@ void setup() {
   Serial.begin(115200);
   delay(1000);
 
-  // init TSENS
-  tsens_init();
-
   // radio init (uses default VSPI)
   int16_t st = radio.begin(915000000);
   debug(st != RADIOLIB_ERR_NONE, F("Init radio failed"), st, true);
@@ -26,15 +23,15 @@ void setup() {
 }
 
 void loop() {
-  // 1) read temp (°C → centi-°C)
-  float  tempC = tsens_read();
-  int16_t t100  = isnan(tempC) ? 0 : int16_t(round(tempC * 100));
+  // 1) read hall sensor value
+  int16_t hallValue = hallRead();
+  int16_t t100 = hallValue; // or scale as needed
 
   // 2) grab counter
   uint16_t cnt = uplinkCounter++;
 
   Serial.print(F("Cnt=")); Serial.print(cnt);
-  Serial.print(F("  Temp=")); Serial.print(tempC); Serial.println(F("°C"));
+  Serial.print(F("  Hall=")); Serial.print(hallValue); Serial.println(F(" units"));
 
   // 3) pack into 4 bytes: [cnt_H, cnt_L, t100_H, t100_L]
   uint8_t payload[4] = {
